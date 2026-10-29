@@ -6,10 +6,14 @@ Worked on CsvHelper, FluentValidation and Serilog. The config files are in
 
 ## Install (once per machine)
 
-1. `uv tool install --force habit-hooks --with habit-hooks-csharp`
+The C# plugin isn't on PyPI. Get it from [github.com/isidore/HabitHooksCsharp](https://github.com/isidore/HabitHooksCsharp)
+and build its comment tool before installing; installing straight from the git URL leaves the tool out.
+
+1. `git clone https://github.com/isidore/HabitHooksCsharp`
+1. `dotnet build -c Release HabitHooksCsharp/src/habit_hooks_csharp/comment-tool` (needs the .NET 8 SDK)
+1. `uv tool install --force habit-hooks --with ./HabitHooksCsharp`
    A forced install replaces every plugin, so add a `--with` for each plugin you already use.
 1. `brew install jscpd jq`
-1. A .NET SDK. The comment tool in the csharp plugin needs the .NET 8 runtime or later.
 
 ## Set up the repo
 

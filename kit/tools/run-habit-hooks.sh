@@ -23,9 +23,13 @@ missing() {
     exit 1
 }
 
-command -v habit-hooks >/dev/null || missing habit-hooks "uv tool install habit-hooks --with habit-hooks-$PLUGIN"
+# The C# plugin isn't on PyPI; see docs/HabitHooksSetupCSharp.md in github.com/LearnWithLlew/AiInLegacyCode.
+plugin_source="habit-hooks-$PLUGIN"
+[ "$PLUGIN" = csharp ] && plugin_source="./HabitHooksCsharp (clone github.com/isidore/HabitHooksCsharp and build its comment-tool first)"
+
+command -v habit-hooks >/dev/null || missing habit-hooks "uv tool install habit-hooks --with $plugin_source"
 uv tool list --show-with 2>/dev/null | grep -q "habit-hooks-$PLUGIN" ||
-    missing "habit-hooks-$PLUGIN" "uv tool install --force habit-hooks --with habit-hooks-$PLUGIN (plus a --with for each plugin you already use)"
+    missing "habit-hooks-$PLUGIN" "uv tool install --force habit-hooks --with $plugin_source (plus a --with for each plugin you already use)"
 command -v jscpd >/dev/null || missing jscpd "brew install jscpd"
 if [ "$PLUGIN" = java ]; then
     command -v pmd >/dev/null || missing pmd "brew install pmd"
