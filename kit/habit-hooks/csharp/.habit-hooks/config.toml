@@ -1,0 +1,8 @@
+# habit-hooks init does not detect C#; the csharp plugin is enabled by hand.
+plugins = ["csharp", "generic"]
+files = [
+  "src/**/*.cs",
+  "test/**/*.cs",
+  "!**/bin/**",
+  "!**/obj/**",
+]

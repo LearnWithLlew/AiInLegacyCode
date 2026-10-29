@@ -1,0 +1,9 @@
+{
+  "path": ["."],
+  "format": ["csharp"],
+  "ignore": ["**/bin/**", "**/obj/**", "**/node_modules/**", "results/**"],
+  "mode": "weak",
+  "threshold": 0,
+  "minLines": 5,
+  "minTokens": 50
+}

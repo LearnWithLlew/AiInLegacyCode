@@ -1,0 +1,4 @@
+# The stock comment sensor flags the license header and the `///` docs that the build
+# requires on public API (GenerateDocumentationFile + TreatWarningsAsErrors); this
+# wrapper drops both and keeps the other comments.
+argv = ["${python}", "${dir}/filtered_comments.py", "--", "${files}"]
