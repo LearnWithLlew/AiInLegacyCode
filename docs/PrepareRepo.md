@@ -1,8 +1,8 @@
 # Prepare a Repo for AI-Assisted Cleanup
 
 A checklist for repeating on another repo what we did on Solr: agent rules, fast feedback, smell
-sensors, then a refactoring sweep run by subagents. Each step has a prompt you can paste. Commit after
-each step.
+sensors, then a refactoring sweep run by subagents. Each step has a prompt you can paste; replace `<kit>` with the path to
+[`kit/`](../kit/) in this repo. Commit after each step.
 
 ## 1. Clone and branch
 
@@ -14,8 +14,8 @@ each step.
 ## 2. Agent rules
 
 1. [ ] Copy `AGENTS.md` rules (🍀 prefix, one question at a time, ⭐/❌ decisions, end-of-task report,
-   no private memory, `1.` lists) and `build-tools/create-commit-message.sh` from a prepared repo.
-   > Copy the agent rules from `<path>/AGENTS.md` and `build-tools/create-commit-message.sh` into this
+   no private memory, `1.` lists) and `build-tools/create-commit-message.sh` from [`kit/`](../kit/).
+   > Copy the agent rules from `<kit>/AGENTS.md` and `<kit>/build-tools/create-commit-message.sh` into this
    > repo. Merge with any AGENTS.md/CLAUDE.md already here, keep the project's own guidance. Then commit.
 1. [ ] Check: the reply starts with 🍀 and the commit message starts with `. e`.
 
@@ -50,7 +50,7 @@ each step.
    brew install pmd jscpd        # for Java
    ```
 1. [ ] Configure and run it on the repo.
-   > Set up habit-hooks for this repo, following `<path>/InternalDocuments/habit-hooks.md`. Get
+   > Set up habit-hooks for this repo, following `<kit>/InternalDocuments/habit-hooks.md`. Get
    > `habit-hooks init` clean and a full run working. Make `build-tools/run-habit-hooks.sh` that checks
    > the tools are installed but never reinstalls them. Write `InternalDocuments/habit-hooks.md`.
 1. [ ] Watch for:
@@ -71,7 +71,7 @@ each step.
 ## 7. The process file
 
 1. [ ] Adapt the sweep process.
-   > Make a version of `<path>/InternalDocuments/processes/habit-hooks.process.md` for this repo.
+   > Make a version of `<kit>/InternalDocuments/processes/habit-hooks.process.md` for this repo.
 1. [ ] Make sure it says:
    1. One subagent per file, one at a time.
    1. One fix → format → `quick_check.sh` → commit `- r`. Revert with `git revert`, never `reset --hard`.
