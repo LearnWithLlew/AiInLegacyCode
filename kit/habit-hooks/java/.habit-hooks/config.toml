@@ -1,0 +1,5 @@
+plugins = ["java", "generic"]
+files = [
+  "**/*.java",
+  "!**/target/**/*.java",
+]

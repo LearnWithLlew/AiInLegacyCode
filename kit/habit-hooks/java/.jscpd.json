@@ -1,0 +1,19 @@
+{
+  "path": [
+    "."
+  ],
+  "format": [
+    "java"
+  ],
+  "ignore": [
+    "**/target/**",
+    "**/node_modules/**"
+  ],
+  "mode": "weak",
+  "threshold": 0,
+  "minLines": 5,
+  "minTokens": 50,
+  "ignorePattern": [
+    "import\\s+[\\w.*]+;"
+  ]
+}
