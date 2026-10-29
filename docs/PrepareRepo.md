@@ -14,8 +14,8 @@ sensors, then a refactoring sweep run by subagents. Each step has a prompt you c
 ## 2. Agent rules
 
 1. [ ] Copy `AGENTS.md` rules (🍀 prefix, one question at a time, ⭐/❌ decisions, end-of-task report,
-   no private memory, `1.` lists) and `build-tools/create-commit-message.sh` from [`kit/`](../kit/).
-   > Copy the agent rules from `<kit>/AGENTS.md` and `<kit>/build-tools/create-commit-message.sh` into this
+   no private memory, `1.` lists) and `tools/create-commit-message.sh` from [`kit/`](../kit/).
+   > Copy the agent rules from `<kit>/AGENTS.md` and `<kit>/tools/create-commit-message.sh` into this
    > repo. Merge with any AGENTS.md/CLAUDE.md already here, keep the project's own guidance. Then commit.
 1. [ ] Check: the reply starts with 🍀 and the commit message starts with `. e`.
 
@@ -51,7 +51,7 @@ sensors, then a refactoring sweep run by subagents. Each step has a prompt you c
    ```
 1. [ ] Configure and run it on the repo.
    > Set up habit-hooks for this repo, following `<kit>/InternalDocuments/habit-hooks.md`. Get
-   > `habit-hooks init` clean and a full run working. Make `build-tools/run-habit-hooks.sh` that checks
+   > `habit-hooks init` clean and a full run working. Make `tools/run-habit-hooks.sh` that checks
    > the tools are installed but never reinstalls them. Write `InternalDocuments/habit-hooks.md`.
 1. [ ] Watch for:
    1. Files the parser cannot handle: one failure aborts the whole run, so exclude them in

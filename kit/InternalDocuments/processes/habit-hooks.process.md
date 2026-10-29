@@ -1,6 +1,6 @@
 # habit-hooks
 
-Habit Hooks is a code-smell sensor tool, run via `build-tools/run-habit-hooks.sh`.
+Habit Hooks is a code-smell sensor tool, run via `tools/run-habit-hooks.sh`.
 It scans files for structural smells (long methods, deep nesting, complexity, too many
 parameters, empty catches, oversized files, duplication) and reports them as findings with
 instructions on how to clean. Follow those instructions and clean up the code.
@@ -8,9 +8,9 @@ See `InternalDocuments/habit-hooks.md` for setup.
 
 ## Usage
 ```
-build-tools/run-habit-hooks.sh path/to/File.java   # single file
-build-tools/run-habit-hooks.sh --branch main       # changed files vs a branch
-build-tools/run-habit-hooks.sh --all               # whole scanned scope
+tools/run-habit-hooks.sh path/to/File.java   # single file
+tools/run-habit-hooks.sh --branch main       # changed files vs a branch
+tools/run-habit-hooks.sh --all               # whole scanned scope
 ```
 
 ## Steps
@@ -25,7 +25,7 @@ For each File:
    If it fails, fix or revert with `git revert`, never `git reset --hard`.
    Don't pipe `quick_check.sh` into `tail`/`grep`; that hides its exit code.
 1. Commit the change (We will review them later) with the message from
-   `bash build-tools/create-commit-message.sh proven refactor "<short-message>"` (gives `- r <short-message>`).
+   `bash tools/create-commit-message.sh proven refactor "<short-message>"` (gives `- r <short-message>`).
 1. Repeat from "Run Habit Hooks" until the remaining findings are worth leaving.
    Make at most 5 commits per file; at most 3 if one quick check takes over 5 minutes.
 1. When done with the file, run the module's full static check (e.g. `./gradlew :<module>:check -x test`).

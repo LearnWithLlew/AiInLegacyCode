@@ -5,12 +5,12 @@ Install (once per machine): `uv tool install --force habit-hooks --with habit-ho
 `brew install jscpd` (and `brew install pmd` for Java). Then `habit-hooks init` writes the config and
 reports anything still missing.
 
-Run `build-tools/run-habit-hooks.sh` from anywhere; it checks the tools are installed (never
+Run `tools/run-habit-hooks.sh` from anywhere; it checks the tools are installed (never
 reinstalls) and runs from the repo root.
 
-- `build-tools/run-habit-hooks.sh path/To/File.java` — check one file
-- `build-tools/run-habit-hooks.sh --branch main` — check files changed vs. main
-- `build-tools/run-habit-hooks.sh --all` — check the whole repo
+- `tools/run-habit-hooks.sh path/To/File.java` — check one file
+- `tools/run-habit-hooks.sh --branch main` — check files changed vs. main
+- `tools/run-habit-hooks.sh --all` — check the whole repo
 
 The language plugin finds structural smells: long methods, complexity, too many parameters,
 deep nesting, unused code, empty catches. The generic plugin adds file length and duplication (jscpd).
