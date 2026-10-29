@@ -8,7 +8,9 @@ Resources for the talk *AI in Legacy Code*: how to prepare an existing codebase 
 
 1. [slides/](slides/) — the slide deck
 1. [docs/](docs/) — the checklist, the slide outline, and the example repos
-1. [kit/](kit/) — agent rules, commit script and habit-hooks process to copy into your own repo
+    1. [Habit Hooks setup for Java](docs/HabitHooksSetupJava.md)
+    1. [Habit Hooks setup for C#](docs/HabitHooksSetupCSharp.md)
+1. [kit/](kit/) — agent rules, commit script, habit-hooks config and process to copy into your own repo
 
 ## Talk page
 
