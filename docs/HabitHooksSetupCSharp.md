@@ -2,46 +2,39 @@
 
 How to set up [Habit Hooks](https://github.com/habit-hooks/habit-hooks) on a C# repo.
 Worked on CsvHelper, FluentValidation and Serilog. The config files are in
-[`kit/habit-hooks/csharp/`](../kit/habit-hooks/csharp/), taken from Serilog.
+[`kit/habit-hooks/csharp/`](../kit/habit-hooks/csharp/).
 
 ## Install (once per machine)
 
-The C# plugin isn't on PyPI. Get it from [github.com/isidore/HabitHooksCsharp](https://github.com/isidore/HabitHooksCsharp)
-and build its comment tool before installing; installing straight from the git URL leaves the tool out.
-
-1. `git clone https://github.com/isidore/HabitHooksCsharp`
-1. `dotnet build -c Release HabitHooksCsharp/src/habit_hooks_csharp/comment-tool` (needs the .NET 8 SDK)
-1. `uv tool install --force habit-hooks --with ./HabitHooksCsharp`
+1. `uv tool install --force habit-hooks --with habit-hooks-csharp`
    A forced install replaces every plugin, so add a `--with` for each plugin you already use.
-1. `brew install jscpd jq`
+   The plugin is [habit-hooks-csharp](https://pypi.org/project/habit-hooks-csharp/) on PyPI
+   ([source](https://github.com/isidore/HabitHooksCsharp)).
+1. `brew install jscpd`
+1. The .NET 8 SDK or later.
 
 ## Set up the repo
 
 1. Copy `kit/habit-hooks/csharp/.habit-hooks/` and `kit/habit-hooks/csharp/.jscpd.json` to the repo root.
-1. In `.habit-hooks/config.toml`, set `files` to where the code lives (default `src/` and `test/`).
-1. In `.habit-hooks/csharp/sensors/roslyn.toml`, set the project path and framework on the `warnings=` line.
+1. In `.habit-hooks/config.toml`, set `files` to where the code lives, and set `--project` to the solution or
+   project the roslyn sensor should build (or delete those lines if the folder has only one).
 1. Copy `kit/tools/run-habit-hooks.sh` to `tools/` and set `PLUGIN=csharp`.
-1. Run `habit-hooks init`. It doesn't detect C#; the config already turns the csharp plugin on.
 1. Run `tools/run-habit-hooks.sh --all`. It exits 1 whenever it finds smells; that is not a failure.
 1. Copy `kit/InternalDocuments/habit-hooks.md` into the repo and fill in the details below.
 1. Commit.
 
 ## What it finds
 
-1. From the csharp plugin: comments, and Roslyn analyzer warnings for unused members, parameters and
-   imports, and high complexity.
+1. **smells** (no build): 4 or more parameters, 12 or more statements in a method, nesting 3 deep,
+   cyclomatic complexity of 10 or more, empty catch blocks. Same thresholds as the Java plugin.
+1. **comment**: comments that could be names. License headers and `///` doc comments are skipped by default;
+   `[sensors.comment] args = ["--include-file-header", "--include-doc-comments"]` turns them back on.
+1. **roslyn**: unused members, fields, parameters, variables and imports, and high coupling. It builds in Debug
+   with the analyzers turned on, even when the project treats warnings as errors, without changing its files.
 1. From the generic plugin: files over 200 lines, and duplication (jscpd).
-1. Not covered: long methods, deep nesting, too many parameters, swallowed exceptions.
-   Write that gap into `habit-hooks.md` so the agent looks for those itself.
 
-## What the config changes, and why
+## What the kit config adds, and why
 
-1. `csharp/sensors/comment.toml` drops license headers and `///` XML doc comments.
-   Those docs are the library's published API documentation, and often required by the build.
-   On CsvHelper this cut one file from 137 comment findings to 51.
-1. `csharp/sensors/roslyn.toml` replaces the stock analyzer sensor. Most libraries treat warnings as
-   errors and turn no metric rules on, so the stock sensor finds nothing. This one builds one project
-   in Debug with all analyzers on, just for habit-hooks; the normal build is untouched.
 1. `.jscpd.json` scans from the repo root (`"."`) in `weak` mode, so comments don't count as duplication.
    Scanning from `src` breaks the next item.
 1. `generic/sensors/` replaces the jscpd sensor. The stock one reports the whole repo's duplication on
