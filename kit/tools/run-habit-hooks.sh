@@ -23,9 +23,7 @@ missing() {
     exit 1
 }
 
-# The C# plugin isn't on PyPI; see docs/HabitHooksSetupCSharp.md in github.com/LearnWithLlew/AiInLegacyCode.
 plugin_source="habit-hooks-$PLUGIN"
-[ "$PLUGIN" = csharp ] && plugin_source="./HabitHooksCsharp (clone github.com/isidore/HabitHooksCsharp and build its comment-tool first)"
 
 command -v habit-hooks >/dev/null || missing habit-hooks "uv tool install habit-hooks --with $plugin_source"
 uv tool list --show-with 2>/dev/null | grep -q "habit-hooks-$PLUGIN" ||

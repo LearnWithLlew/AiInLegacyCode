@@ -1,4 +1,3 @@
-# habit-hooks init does not detect C#; the csharp plugin is enabled by hand.
 plugins = ["csharp", "generic"]
 files = [
   "src/**/*.cs",
@@ -6,3 +5,7 @@ files = [
   "!**/bin/**",
   "!**/obj/**",
 ]
+
+# The solution or project the roslyn sensor builds; delete if the folder has only one.
+[sensors.roslyn]
+args = ["--project", "src/MyProject/MyProject.csproj"]
